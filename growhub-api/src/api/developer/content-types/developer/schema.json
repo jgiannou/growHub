@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "developers",
+  "info": {
+    "singularName": "developer",
+    "pluralName": "developers",
+    "displayName": "Developer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "enumeration",
+      "enum": [
+        "Junior FrontEnd Developer",
+        "Mid FrontEnd Developer",
+        "Senior FrontEnd Developer",
+        "Junior BackEnd Developer",
+        "Mid BackEnd Developer",
+        "Senior BackEnd Developer",
+        "Junior FullStack Developer",
+        "Mid FullStack Developer",
+        "Senior FullStack Developer",
+        "FrontEnd Team Leader",
+        "Backend Team Leader"
+      ],
+      "required": true
+    },
+    "team": {
+      "type": "enumeration",
+      "enum": [
+        "FrontEnd",
+        "BackEnd"
+      ],
+      "required": true
+    },
+    "employmentStatus": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "vacation",
+        "leave"
+      ],
+      "required": true
+    },
+    "skills": {
+      "type": "json",
+      "required": true
+    },
+    "joinDate": {
+      "type": "date",
+      "required": true
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "developer"
+    }
+  }
+}

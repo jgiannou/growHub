@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Review",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "codeQuality": {
+      "type": "decimal",
+      "required": true,
+      "max": 5,
+      "min": 1
+    },
+    "communication": {
+      "type": "decimal",
+      "max": 5,
+      "min": 1,
+      "required": true
+    },
+    "teamWork": {
+      "type": "decimal",
+      "required": true,
+      "max": 5,
+      "min": 1
+    },
+    "delivery": {
+      "type": "decimal",
+      "required": true,
+      "max": 5,
+      "min": 1
+    },
+    "improvements": {
+      "type": "json",
+      "required": true
+    },
+    "notes": {
+      "type": "text"
+    },
+    "developer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::developer.developer",
+      "inversedBy": "reviews"
+    }
+  }
+}
