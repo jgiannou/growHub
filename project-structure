@@ -1,0 +1,14 @@
+dev-management-frontend/
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   ├── developers/
+│   │   ├── meetings/
+│   │   ├── reviews/
+│   │   └── shared/
+│   ├── pages/
+│   ├── services/
+│   ├── types/
+│   ├── utils/
+│   ├── hooks/
+│   └── context/ 

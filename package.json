@@ -1,0 +1,104 @@
+{
+  "name": "growhub",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Developer Performance Management System",
+  "author": {
+    "name": "GrowHub Team"
+  },
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm run dev:strapi\" \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "tsc -p tsconfig.node.json && cross-env NODE_ENV=development ELECTRON_START_URL=http://localhost:3000 electron .",
+    "dev:strapi": "cd growhub-api && npm run develop",
+    "build": "npm run build:web && npm run build:electron && npm run build:strapi",
+    "build:web": "tsc && vite build",
+    "build:electron": "tsc -p tsconfig.node.json",
+    "build:strapi": "cd growhub-api && npm run build",
+    "start": "cross-env NODE_ENV=production electron .",
+    "preview": "vite preview",
+    "package:prepare": "cd growhub-api && npm install --production && cd ..",
+    "package": "npm run build && npm run package:prepare && electron-builder build --mac",
+    "clean": "rm -rf dist/* && rm -rf release/*"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.7.9",
+    "framer-motion": "^10.16.16",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.21.0",
+    "recharts": "^2.10.3",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^27.1.0",
+    "electron-builder": "^24.9.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.growhub.id",
+    "productName": "GrowHub",
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/growHub.icns",
+      "category": "public.app-category.developer-tools"
+    },
+    "asar": false,
+    "extraResources": [
+      {
+        "from": "growhub-api",
+        "to": "growhub-api",
+        "filter": [
+          "**/*",
+          "node_modules/**/*",
+          "package.json",
+          "package-lock.json",
+          ".npmrc",
+          "src/**/*",
+          "config/**/*",
+          "database/**/*",
+          "public/**/*",
+          "dist/**/*",
+          "build/**/*",
+          "!.cache/**/*",
+          "!.tmp/**/*",
+          "!.env",
+          "!.strapi-updater.json"
+        ]
+      },
+      {
+        "from": "node_modules",
+        "to": "node_modules",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
+}
